@@ -8,7 +8,7 @@ import Cart from "./components/cart/Cart.vue";
 <template>
   <AppHeader />
   <main class="container mx-auto py-8 px-4 flex flex-wrap">
-    <ProductList />
+    <ProductList apiURL="https://69305335778bbf9e0070e673.mockapi.io/" />
     <Cart />
   </main>
   <AppFooter />
