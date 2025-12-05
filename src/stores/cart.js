@@ -1,7 +1,6 @@
-// 📂 stores/cart.js
-import { reactive, watch, computed } from "vue";
+import { reactive, watch, computed, ref } from "vue";
 
-// 1. On déclare la variable "cart" (et pas products !)
+// 1. On déclare la variable "cart"
 const cart = reactive(JSON.parse(localStorage.getItem("cart") || "[]"));
 
 // 2. Les fonctions
@@ -32,9 +31,28 @@ const deleteOneById = (id) => {
 
 //Total HTVA
 const subTotal = computed(() => {
-  return cart.reduce((total, product) => {
-    return total + product.price * product.quantity;
+  const calcul = cart.reduce((total, item) => {
+    return total + item.price * item.quantity;
   }, 0);
+
+  return calcul.toFixed(2);
+});
+
+// TVA
+const taxRate = computed(() => {
+  return (Number(subTotal.value) * 0.2).toFixed(2);
+});
+
+//Delivery
+
+const deliveryCost = ref(5);
+// Total du panier
+const totalPrice = computed(() => {
+  return (
+    Number(subTotal.value) +
+    Number(taxRate.value) +
+    Number(deliveryCost.value)
+  ).toFixed(2);
 });
 
 // 3. Le Watcher
@@ -52,4 +70,7 @@ export const cartStore = {
   addItem,
   deleteOneById,
   subTotal,
+  taxRate,
+  totalPrice,
+  deliveryCost,
 };
