@@ -1,10 +1,12 @@
 // 📂 stores/cart.js
-import { reactive, watch } from "vue";
+import { reactive, watch, computed } from "vue";
 
 // 1. On déclare la variable "cart" (et pas products !)
 const cart = reactive(JSON.parse(localStorage.getItem("cart") || "[]"));
 
 // 2. Les fonctions
+
+// Ajouter un article
 const addItem = (product) => {
   const item = cart.find((p) => p.id === product.id);
   if (item) {
@@ -20,14 +22,20 @@ const addItem = (product) => {
     });
   }
 };
-
+// Supprimer un article
 const deleteOneById = (id) => {
-  // CORRECTION ICI : On utilise "cart", pas "products"
   const index = cart.findIndex((item) => item.id === id);
   if (index !== -1) {
     cart.splice(index, 1);
   }
 };
+
+//Total HTVA
+const subTotal = computed(() => {
+  return cart.reduce((total, product) => {
+    return total + product.price * product.quantity;
+  }, 0);
+});
 
 // 3. Le Watcher
 watch(
@@ -43,4 +51,5 @@ export const cartStore = {
   cart,
   addItem,
   deleteOneById,
+  subTotal,
 };

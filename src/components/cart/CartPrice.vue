@@ -1,10 +1,12 @@
-<script setup></script>
+<script setup>
+import { cartStore } from "@/stores/cart";
+</script>
 <template>
   <div class="bg-gray-50">
     <div class="p-6">
       <div class="flex justify-between mb-1">
         <span><strong>Total HTVA:</strong></span>
-        <span>€50.00</span>
+        <span>{{ cartStore.subTotal }} €</span>
       </div>
       <div class="flex justify-between mb-1">
         <span><strong>Taxe (20%):</strong></span>
