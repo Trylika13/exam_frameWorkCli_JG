@@ -15,18 +15,17 @@ const addItem = (product) => {
       id: product.id,
       name: product.name,
       price: product.price,
-      image:
-        product.image || `https://picsum.photos/300/200/?random=${product.id}`,
+      image: `https://picsum.photos/300/200/?random=${product.id}`,
       quantity: 1,
     });
   }
 };
 // Supprimer un article
 const deleteOneById = (id) => {
-  const index = cart.findIndex((item) => item.id === id);
-  if (index !== -1) {
-    cart.splice(index, 1);
-  }
+  cart.splice(
+    cart.findIndex((item) => item.id === id),
+    1
+  );
 };
 
 //Total HTVA

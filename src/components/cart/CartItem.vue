@@ -21,7 +21,7 @@ const props = defineProps({ item: Object, required: true });
         type="number"
         class="form-input mt-1 block w-16 text-center rounded text-gray-700 border-gray-300 border"
         v-model="item.quantity"
-        min="0"
+        min="1"
       />
       <button
         class="ml-2 text-red-500 hover:text-red-700"

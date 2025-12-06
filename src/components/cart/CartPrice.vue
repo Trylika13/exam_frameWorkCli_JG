@@ -1,5 +1,6 @@
 <script setup>
 import { cartStore } from "@/stores/cart";
+import MyButton from "../ui/MyButton.vue";
 </script>
 <template>
   <div class="bg-gray-50">
@@ -26,11 +27,7 @@ import { cartStore } from "@/stores/cart";
         <span><strong>Total Général:</strong></span>
         <span>€{{ cartStore.totalPrice }}</span>
       </div>
-      <button
-        class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cart-btn"
-      >
-        Procéder au paiement
-      </button>
+      <MyButton> Procéder au paiement </MyButton>
     </div>
   </div>
 </template>
