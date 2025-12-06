@@ -2,10 +2,9 @@
 import Product from "./Product.vue";
 import { productsStore } from "@/stores/products";
 import { onMounted } from "vue";
-import DB from "@/services/DB";
 
 const props = defineProps({
-  apiURL: { String, required: true },
+  apiURL: { type: String, required: true },
 });
 onMounted(async () => {
   productsStore.init(props.apiURL);

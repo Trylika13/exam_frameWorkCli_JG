@@ -1,9 +1,9 @@
 import { reactive, watch, computed, ref } from "vue";
 
-// 1. On déclare la variable "cart"
+// On déclare la variable "cart"
 const cart = reactive(JSON.parse(localStorage.getItem("cart") || "[]"));
 
-// 2. Les fonctions
+// LES FONCTIONS
 
 // Ajouter un article
 const addItem = (product) => {
@@ -15,27 +15,24 @@ const addItem = (product) => {
       id: product.id,
       name: product.name,
       price: product.price,
-      image:
-        product.image || `https://picsum.photos/300/200/?random=${product.id}`,
+      image: `https://picsum.photos/300/200/?random=${product.id}`,
       quantity: 1,
     });
   }
 };
 // Supprimer un article
 const deleteOneById = (id) => {
-  const index = cart.findIndex((item) => item.id === id);
-  if (index !== -1) {
-    cart.splice(index, 1);
-  }
+  cart.splice(
+    cart.findIndex((item) => item.id === id),
+    1
+  );
 };
 
 //Total HTVA
 const subTotal = computed(() => {
-  const calcul = cart.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
-
-  return calcul.toFixed(2);
+  return cart
+    .reduce((total, item) => total + item.price * item.quantity, 0)
+    .toFixed(2);
 });
 
 // TVA
@@ -55,7 +52,7 @@ const totalPrice = computed(() => {
   ).toFixed(2);
 });
 
-// 3. Le Watcher
+//Le Watcher
 watch(
   cart,
   (newCart) => {
@@ -64,7 +61,7 @@ watch(
   { deep: true }
 );
 
-// 4. L'export
+//Export
 export const cartStore = {
   cart,
   addItem,

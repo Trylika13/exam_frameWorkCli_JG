@@ -1,7 +1,12 @@
 <script setup>
 import { cartStore } from "@/stores/cart";
 
-const props = defineProps({ item: Object, required: true });
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true,
+  },
+});
 </script>
 <template>
   <li class="flex justify-between items-center py-3">
@@ -21,7 +26,7 @@ const props = defineProps({ item: Object, required: true });
         type="number"
         class="form-input mt-1 block w-16 text-center rounded text-gray-700 border-gray-300 border"
         v-model="item.quantity"
-        min="0"
+        min="1"
       />
       <button
         class="ml-2 text-red-500 hover:text-red-700"
